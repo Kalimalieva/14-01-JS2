@@ -22,18 +22,24 @@ btnCheck.addEventListener("click", () => {
 
 
 //------------------------------------------ HW-2
-const rel = document.querySelector('.relative')
-const posDiv = document.querySelector('.position');
+
+const posDiv = document.querySelector('.box');
+const clickBtn = document.querySelector('.clickMe');
 
 let num = 0;
-const right = ()=>{
-  num++
-  if(posDiv.style.left!=="700px"){
-    posDiv.style.left = num + "px"
-    return right()
-  }
+
+const clickBtnAction = () => {
+    num += 15;
+    posDiv.style.left = `${num}px`;
+
+    if(num <= 480) {
+        clickBtnAction()
+    }
 }
-right()
+
+clickBtn.addEventListener("click", () => {
+    clickBtnAction()
+})
 
 
 
