@@ -95,7 +95,9 @@ function closeModal() {
   document.body.style.overflow = "";
 }
 
-modalTrigger.addEventListener("click", openModal)
+modalTrigger.addEventListener("click", openModal);
+
+
 
 modal.addEventListener("click", (event) => {
   if (
