@@ -730,9 +730,3 @@ a {
         opacity: 1;
     }
 }
-
-body .btn_white {
-   padding-right: 0 !important;
-   overflow: auto;
-   
-}
