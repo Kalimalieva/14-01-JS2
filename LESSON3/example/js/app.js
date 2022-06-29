@@ -123,40 +123,40 @@ window.addEventListener("scroll", openModalScroll);
 const modalTimeout = setTimeout(openModal, 5000);
 
 
-
-// form//fetch
-const forms = document.querySelectorAll("form");
+// form // fetch
+const forms = document.querySelectorAll('form')
 const message = {
-    loading: "Идет загрузка",
-    success: "Спасибо, скоро свяжемся !",
-    fail: "Что-то пошло не так",
-};
+    loading: "Loading...",
+    success: 'Спасибо, скоро свяжемся !',
+    fail: 'Что-то пошло не так'
+}
 
-forms.forEach((item) => {
-    bindPostData(item);
+forms.forEach(item => {
+    bindPostData(item)
 });
 
 const postData = async (url, data) => {
-    const res = await fetch(url, {
+    const res = await fetch (url,  {
         method: "POST",
         headers: {
             "Content-type": "application/json",
         },
         body: data,
     });
-    return res;
-};
-
+    return await res;
+}
 
 function bindPostData(form) {
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
 
         const messageBlock = document.createElement('div')
         messageBlock.src = message.loading
-        messageBlock.style.cssText = `display: block;
-        margin: 30px auto 0`;
-        form.insertAdjacentElement("afterend", messageBlock)
+        messageBlock.style.cssText = `
+    display: block;
+    margin: 20px auto 0;
+    `;
+        form.insertAdjacentElement("afterend", messageBlock);
 
         const formData = new FormData(form);
         const object = {};
@@ -165,29 +165,20 @@ function bindPostData(form) {
             object[i] = item;
         });
 
-        // fetch("server.php", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-type": "application/json",
-        //   },
-        //   body: JSON.stringify(object),
-        // });
-
-        postData("server.php", JSON.stringify(object))
+        postData("server-php", JSON.stringify(object))
             .then((data) => {
                 console.log(data);
                 showThanksModal(message.success);
             })
             .catch(() => {
-                showThanksModal(message.fail)
+                showThanksModal(message.fail);
             })
             .finally(() => {
                 form.reset();
-                messageBlock.remove()
+                messageBlock.remove();
             });
-    });
-};
-
+    })
+}
 function showThanksModal(message) {
     openModal();
     const prevModal = document.querySelector(".modal__dialog");
@@ -195,12 +186,13 @@ function showThanksModal(message) {
 
     const thanksModal = document.createElement("div");
     thanksModal.classList.add("modal__dialog");
+
     thanksModal.innerHTML = `
-          <div class="modal__content">
-              <div class="modal__close">x</div>
-              <div class="modal__title">${message}</div>
-          </div>
-      `;
+		<div class="modal__content">
+			<div class="modal__close">x</div>
+			<div class="modal__title">${message}</div>
+		</div>
+	`;
     modal.append(thanksModal);
 
     setTimeout(() => {
@@ -208,6 +200,9 @@ function showThanksModal(message) {
         closeModal();
         thanksModal.remove();
     }, 2000);
-}
+} 
+
+
+
 
 
